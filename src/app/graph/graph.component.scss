@@ -1,0 +1,422 @@
+$node-distance: 32px;
+$node-height: 51px;
+$node-width: 60px;
+$arrow-size: 5px;
+$arrow-color: #333 !default;
+
+@mixin unify-parent($parent) {
+    @at-root #{selector-unify($parent, &)} {
+        @content;
+    }
+}
+
+@mixin node-state() {
+
+    &-active {
+
+        $state-color: red;
+
+        > .uk-workflow-node-object {
+
+            border-color: $state-color;
+            color: $state-color;
+            font-weight: 900;
+
+            .uk-workflow-node-object-arrow-right,
+            .uk-workflow-node-object-arrow-left {
+                border-color: $state-color !important;
+                z-index: 1;
+            }
+
+            .uk-workflow-node-object-arrow-right::before,
+            .uk-workflow-node-object-arrow-right::after,
+            .uk-workflow-node-object-arrow-left::before,
+            .uk-workflow-node-object-arrow-left::after {
+                border-left-color: $state-color;
+                border-right-color: $state-color;
+            }
+        }
+    }
+
+    &-disabled {
+
+        $state-color: lightgray;
+
+        >div {
+
+            border-color: $state-color;
+            color: $state-color;
+
+            .uk-workflow-node-object-arrow-right,
+            .uk-workflow-node-object-arrow-left {
+                border-color: $state-color !important;
+                z-index: 1;
+            }
+
+            .uk-workflow-node-object-arrow-right::before,
+            .uk-workflow-node-object-arrow-right::after,
+            .uk-workflow-node-object-arrow-left::before,
+            .uk-workflow-node-object-arrow-left::after {
+                border-left-color: $state-color;
+                border-right-color: $state-color;
+            }
+        }
+    }
+}
+
+@mixin arrow-heads {
+
+    &::before,
+    &::after {
+        //display: none;
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: $arrow-size solid transparent;
+        border-bottom: $arrow-size solid transparent;
+    }
+
+    &::before {
+        display: none;
+        left: 0;
+        border-right: $arrow-size solid $arrow-color;
+    }
+
+    &::after {
+        right: 0;
+        border-left: $arrow-size solid $arrow-color;
+    }
+
+}
+
+.two-way {
+    &::before {
+        display: block !important;
+    }
+
+    .arrow-heads {
+        &::before {
+            display: block !important;
+        }
+    }
+}
+
+.three-step-connector {
+    width: calc(32% + (2 * (#{$node-width} + 4px)) + (3 * #{$node-distance})) !important;
+}
+.five-step-connector {
+    width: calc(32% + (4 * (#{$node-width} + 4px)) + (5 * #{$node-distance})) !important;
+}
+
+.uk-workflow {
+    font-size: 11px;
+    position: relative;
+
+    &-row {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    &-node {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &.multi-level {
+            height: (3 * $node-height + 2 * $node-distance) + 10;
+
+            &:first-child {
+                margin-left: $node-width + $node-distance;
+            }
+        }
+
+        &:first-child {
+            .uk-workflow-node-object-arrow-left {
+                display: none;
+            }
+        }
+
+        &:last-child {
+            .uk-workflow-node-object-arrow-right {
+                display: none;
+            }
+        }
+
+        &-object {
+            background-color: transparent;
+            margin-right: $node-distance;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: $node-height;
+            width: $node-width;
+            border: solid 2px #333;
+            border-radius: 30px;
+
+            &-arrow {
+                border-width: 1px;
+                border-color: $arrow-color;
+                position: absolute;
+                width: $node-distance;
+
+                &::before,
+                &::after {
+                    top: ($arrow-size / 2 + 2px) * -1;
+                }
+
+                &-left,
+                &-right {
+                    border-bottom-style: solid;
+                    @include arrow-heads();
+                }
+
+                &-left {
+                    right: calc(100% + 2px);
+                    z-index: -1;
+                }
+
+                &-right {
+                    left: calc(100% + 2px);
+                }
+
+            }
+
+            &-left {
+                position: absolute;
+                right: 100%;
+            }
+
+            &-right {
+                position: absolute;
+                left: 100%;
+
+                &.uk-workflow-node-object-connector {
+                    transform: rotateY(180deg);
+                }
+            }
+
+            &-connector {
+                border-width: 1px;
+                border-radius: 0;
+                position: absolute;
+                height: 18px;
+                width: 200px;
+
+                >span {
+                    display: none;
+                }
+
+                @include arrow-heads();
+
+                &::before {
+                    left: auto;
+                }
+
+                @include unify-parent(".uk-workflow-node-object-left") {
+                    right: 50%;
+                }
+
+                @include unify-parent(".uk-workflow-node-object-right") {
+                    left: 50%;
+                }
+            }
+
+            &.hidden {
+                visibility: hidden;
+            }
+        }
+
+        &-route {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+
+            &-top,
+            &-bottom {
+
+                .uk-workflow-node-object {
+
+                    &-arrow-left,
+                    &-arrow-right {
+                        display: none;
+                    }
+
+                    &-arrow-vertical {
+                        border-left: solid 1px $arrow-color;
+                        height: 31px;
+                        left: 50%;
+
+                        >.arrow-heads {
+                            @include arrow-heads();
+
+                            &::before,
+                            &::after {
+                                transform: rotate(-90deg);
+                                left: -3px;
+                            }
+
+                            &::before {
+                                bottom: -2.5px;
+                            }
+
+                            &::after {
+                                top: -2.5px;
+                            }
+                        }
+                    }
+
+                    &-left,
+                    &-right {
+                        .uk-workflow-node-object-arrow-vertical {
+                            height: 5px;
+                            width: $node-width + 20px;
+                            left: 50%;
+                            border-bottom: solid 1px $arrow-color;
+                            border-left: none;
+
+                            &::before {
+                                content: "";
+                                border-left: solid 1px $arrow-color;
+                                height: 12px;
+                                position: absolute;
+                                left: 0;
+                                top: 6px;
+                            }
+
+                            &::after {
+                                content: "";
+                                border-right: solid 1px $arrow-color;
+                                height: 19px;
+                                position: absolute;
+                                right: 0;
+                                top: -13px;
+                            }
+
+                            >.arrow-heads {
+
+                                &::before,
+                                &::after {
+                                    transform: rotate(90deg)
+                                }
+
+                                &::before {
+                                    top: -15.5px;
+                                    left: calc(100% - 3px);
+                                    ;
+                                }
+
+                                &::after {
+                                    top: 11px;
+                                    left: -2px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &-top {
+                top: 0;
+
+                .uk-workflow-node-object-connector {
+                    border-bottom: none;
+                    bottom: -31px;
+
+                    &::before,
+                    &::after {
+                        bottom: ($arrow-size / 2) * -1;
+                    }
+
+                    &::before {
+                        transform: rotate(-90deg);
+                        right: -3px;
+
+                    }
+
+                    &::after {
+                        transform: rotate(90deg);
+                        left: -3px;
+                    }
+                }
+
+                .uk-workflow-node-object {
+
+                    .uk-workflow-node-object-arrow-vertical {
+                        bottom: -33px;
+                    }
+
+                    &-left,
+                    &-right {
+                        .uk-workflow-node-object-arrow-vertical {
+                            top: calc(100% + 20px);
+                            transform-origin: top right;
+                            transform: rotateX(180deg);
+                        }
+                    }
+
+                    &-right {
+                        .uk-workflow-node-object-arrow-vertical {
+                            transform-origin: top left;
+                            transform: rotateX(180deg) rotateY(180deg);
+                        }
+                    }
+                }
+            }
+
+            &-bottom {
+                bottom: 0;
+
+                .uk-workflow-node-object-connector {
+                    border-top: none;
+                    top: -31px;
+
+                    &::before,
+                    &::after {
+                        top: ($arrow-size / 2) * -1;
+                    }
+
+                    &::before {
+                        transform: rotate(90deg);
+                        right: -3px;
+                    }
+
+                    &::after {
+                        transform: rotate(-90deg);
+                        left: -3px;
+                    }
+                }
+
+                .uk-workflow-node-object {
+
+                    .uk-workflow-node-object-arrow-vertical {
+                        top: -33px;
+                        transform: rotate(180deg);
+                        transform-origin: left;
+                    }
+
+                    &-left,
+                    &-right {
+                        .uk-workflow-node-object-arrow-vertical {
+                            transform: none;
+                            top: -20px;
+                        }
+                    }
+
+                    &-right {
+                        .uk-workflow-node-object-arrow-vertical {
+                            transform-origin: top left;
+                            transform: rotateY(180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        @include node-state();
+    }
+}
