@@ -1,2 +1,16 @@
-<p>graph-route works!</p>
-<app-graph></app-graph>
+<div class="flex-container">
+    <div [formGroup]="nodeFG">
+        <ng-container formArrayName="nodes" *ngFor="let node of nodes.controls; let i = index;">
+            <ng-container [formGroupName]="i">
+                <div class="input-container">
+                    <label>
+                        <input type="checkbox" formControlName="active">
+                        {{nodes.at(i)?.get('name')?.value}} enabled?
+                    </label>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+    <app-graph [nodes]="nodeFG.get('nodes')!.value"></app-graph>
+    <div *ngIf="nodeFG.get('nodes')">{{nodeFG.get('nodes')!.value | json}}</div>
+</div>

@@ -5,6 +5,7 @@ import { GraphComponent } from './graph/graph.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BaseComponent } from './base/base.component';
 import { GraphRouteComponent } from './graph-route/graph-route.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GraphRouteComponent } from './graph-route/graph-route.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [LayoutComponent]
