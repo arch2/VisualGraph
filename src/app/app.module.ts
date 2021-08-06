@@ -6,13 +6,17 @@ import { LayoutComponent } from './layout/layout.component';
 import { BaseComponent } from './base/base.component';
 import { GraphRouteComponent } from './graph-route/graph-route.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PluginGraphRouteComponent } from './plugin-graph-route/plugin-graph-route.component';
+import { PluginGraphComponent } from './plugin-graph/plugin-graph.component';
 
 @NgModule({
   declarations: [
     GraphComponent,
     LayoutComponent,
     BaseComponent,
-    GraphRouteComponent
+    GraphRouteComponent,
+    PluginGraphRouteComponent,
+    PluginGraphComponent
   ],
   imports: [
     AppRoutingModule,
