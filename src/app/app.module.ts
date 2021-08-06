@@ -8,7 +8,8 @@ import { GraphRouteComponent } from './graph-route/graph-route.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PluginGraphRouteComponent } from './plugin-graph-route/plugin-graph-route.component';
 import { PluginGraphComponent } from './plugin-graph/plugin-graph.component';
-
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     GraphComponent,
@@ -21,7 +22,9 @@ import { PluginGraphComponent } from './plugin-graph/plugin-graph.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgxGraphModule,
   ],
   providers: [],
   bootstrap: [LayoutComponent]
