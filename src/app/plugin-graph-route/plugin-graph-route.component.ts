@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSet } from 'vis-data';
+import { Edge, Node } from 'vis-network';
 
 @Component({
   selector: 'app-plugin-graph-route',
@@ -9,20 +10,20 @@ import { DataSet } from 'vis-data';
 export class PluginGraphRouteComponent implements OnInit {
   config: any = {};
 
-  private nodes = new DataSet<any>(
+  private nodes = new DataSet<Node>(
     [
-      { id: 'REQ1', label: 'REQ 1', x: 0, y: 0 },
-      { id: 'REL1', label: 'REL', x: 150, y: 0 },
-      { id: 'AO', label: 'AO', x: 300, y: 0 },
-      { id: 'PA', label: 'PA', x: 450, y: 0 ,color:"red"},
-      { id: 'PEER', label: 'PEER', x: 450, y: -100 },
-      { id: 'IT', label: 'IT', x: 300, y: 100 },
-      { id: 'RMLRO', label: 'RML RO', x: 450, y: 100 },
-      { id: 'NBS', label: 'NBS', x: 600, y: 0 },
-      { id: 'PRISM', label: 'PRISM', x: 750, y: 0 },
-      { id: 'REQ2', label: 'REQ 2', x: 900, y: 0 },
-      { id: 'NBSRO', label: 'NBS RO', x: 1050, y: 0 },
-      { id: 'ARCHPA', label: 'ARCH PA', x: 1200, y: 0 }
+      { id: 'REQ1', label: 'REQ 1', x: 0, y: 0, fixed: true },
+      { id: 'REL1', label: 'REL', x: 150, y: 0, fixed: true },
+      { id: 'AO', label: 'AO', x: 300, y: 0, fixed: true },
+      { id: 'PA', label: 'PA', x: 450, y: 0, fixed: true, color: "red" },
+      { id: 'PEER', label: 'PEER', x: 450, y: -100, fixed: true },
+      { id: 'IT', label: 'IT', x: 300, y: 100, fixed: true },
+      { id: 'RMLRO', label: 'RML RO', x: 450, y: 100, fixed: true },
+      { id: 'NBS', label: 'NBS', x: 600, y: 0, fixed: true },
+      { id: 'PRISM', label: 'PRISM', x: 750, y: 0, fixed: true },
+      { id: 'REQ2', label: 'REQ 2', x: 900, y: 0, fixed: true },
+      { id: 'NBSRO', label: 'NBS RO', x: 1050, y: 0, fixed: true },
+      { id: 'ARCHPA', label: 'ARCH PA', x: 1200, y: 0, fixed: true }
     ]
     //   [
     //   { id: 1, label: 'Node 1', x: 200, y: 40 },
