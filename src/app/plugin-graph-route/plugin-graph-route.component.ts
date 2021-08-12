@@ -11,18 +11,18 @@ export class PluginGraphRouteComponent implements OnInit {
 
   private nodes = new DataSet<any>(
     [
-      { id: 'REQ1', label: 'REQ 1', x: 100, y: 0 },
-      { id: 'REL1', label: 'REL', x: 200, y: 0 },
+      { id: 'REQ1', label: 'REQ 1', x: 0, y: 0 },
+      { id: 'REL1', label: 'REL', x: 150, y: 0 },
       { id: 'AO', label: 'AO', x: 300, y: 0 },
-      { id: 'PA', label: 'PA', x: 400, y: 0 },
-      { id: 'PEER', label: 'PEER', x: 400, y: -100 },
+      { id: 'PA', label: 'PA', x: 450, y: 0 ,color:"red"},
+      { id: 'PEER', label: 'PEER', x: 450, y: -100 },
       { id: 'IT', label: 'IT', x: 300, y: 100 },
-      { id: 'RMLRO', label: 'RML RO', x: 400, y: 100 },
-      { id: 'NBS', label: 'NBS', x: 500, y: 0 },
-      { id: 'PRISM', label: 'PRISM', x: 600, y: 0 },
-      { id: 'REQ2', label: 'REQ 2', x: 700, y: 0 },
-      { id: 'NBSRO', label: 'NBS RO', x: 800, y: 0 },
-      { id: 'ARCHPA', label: 'ARCH PA', x: 900, y: 0 }
+      { id: 'RMLRO', label: 'RML RO', x: 450, y: 100 },
+      { id: 'NBS', label: 'NBS', x: 600, y: 0 },
+      { id: 'PRISM', label: 'PRISM', x: 750, y: 0 },
+      { id: 'REQ2', label: 'REQ 2', x: 900, y: 0 },
+      { id: 'NBSRO', label: 'NBS RO', x: 1050, y: 0 },
+      { id: 'ARCHPA', label: 'ARCH PA', x: 1200, y: 0 }
     ]
     //   [
     //   { id: 1, label: 'Node 1', x: 200, y: 40 },
@@ -35,26 +35,26 @@ export class PluginGraphRouteComponent implements OnInit {
 
   private edges = new DataSet<any>(
     [
-      { id: 'a', from: 'REQ1', to: 'REL1', label: 'next step', arrows: "to", },
-      { id: 'b', from: 'REL1', to: 'REQ1', label: 'prev step', arrows: "to", },
-      { id: 'c', from: 'REL1', to: 'AO', label: 'NEXT', arrows: "to", },
-      { id: 'd', from: 'AO', to: 'REL1', label: 'PREV', arrows: "to", },
-      { id: 'e', from: 'AO', to: 'PA', label: 'NEXT', arrows: "to", },
-      { id: 'f', from: 'PA', to: 'AO', label: 'PREV', arrows: "to", },
-      { id: 'g', from: 'PA', to: 'REQ1', label: 'PREV', arrows: "to", smooth: { type: "curvedCW" } },
-      { id: 'h', from: 'PA', to: 'PEER', label: 'NEXT', arrows: "to", },
-      { id: 'i', from: 'PEER', to: 'PA', label: 'PREV', arrows: "to", },
-      { id: 'j', from: 'PA', to: 'RMLRO', label: 'NEXT', arrows: "to", },
-      { id: 'k', from: 'PA', to: 'IT', label: 'NEXT', arrows: "to", },
-      { id: 'l', from: 'IT', to: 'PA', label: 'PREV', arrows: "to", },
-      { id: 'm', from: 'PA', to: 'NBS', label: 'NEXT', arrows: "to", },
-      { id: 'n', from: 'NBS', to: 'PRISM', label: 'NEXT', arrows: "to", },
-      { id: 'o', from: 'PRISM', to: 'REQ2', label: 'NEXT', arrows: "to", },
-      { id: 'p', from: 'REQ2', to: 'NBSRO', label: 'NEXT', arrows: "to", },
-      { id: 'q', from: 'NBSRO', to: 'ARCHPA', label: 'NEXT', arrows: "to", },
-      { id: 'r', from: 'ARCHPA', to: 'NBSRO', label: 'PREV', arrows: "to", },
-      { id: 's', from: 'ARCHPA', to: 'PA', label: 'NEXT', arrows: "to", smooth: { type: "curvedCW" } },
-      { id: 't', from: 'PA', to: 'ARCHPA', label: 'PREV', arrows: "to,from", smooth: { type: "curvedCW" } }
+      { id: 'a', from: 'REQ1', to: 'REL1', arrows: "to", },
+      { id: 'b', from: 'REL1', to: 'REQ1', arrows: "to", },
+      { id: 'c', from: 'REL1', to: 'AO', arrows: "to", dashes: true },
+      { id: 'd', from: 'AO', to: 'REL1', arrows: "to", dashes: true },
+      { id: 'e', from: 'AO', to: 'PA', arrows: "to", dashes: true },
+      { id: 'f', from: 'PA', to: 'AO', arrows: "to", dashes: true },
+      { id: 'g', from: 'PA', to: 'REQ1', arrows: "to", smooth: { type: "curvedCW", roundness: 0.2 } },
+      { id: 'h', from: 'PA', to: 'PEER', arrows: "to", },
+      { id: 'i', from: 'PEER', to: 'PA', arrows: "to", },
+      { id: 'j', from: 'PA', to: 'RMLRO', arrows: "to", },
+      { id: 'k', from: 'PA', to: 'IT', arrows: "to", },
+      { id: 'l', from: 'IT', to: 'PA', arrows: "to", },
+      { id: 'm', from: 'PA', to: 'NBS', arrows: "to", },
+      { id: 'n', from: 'NBS', to: 'PRISM', arrows: "to", },
+      { id: 'o', from: 'PRISM', to: 'REQ2', arrows: "to", },
+      { id: 'p', from: 'REQ2', to: 'NBSRO', arrows: "to", },
+      { id: 'q', from: 'NBSRO', to: 'ARCHPA', arrows: "to", },
+      { id: 'r', from: 'ARCHPA', to: 'NBSRO', arrows: "to", },
+      { id: 's', from: 'ARCHPA', to: 'PA', arrows: "to", smooth: { type: "curvedCW", roundness: 0.2 } },
+      { id: 't', from: 'PA', to: 'ARCHPA', arrows: "to,from", smooth: { type: "curvedCW", roundness: 0.2 } }
     ]
     // [
     //   { from: 1, to: 3 },
