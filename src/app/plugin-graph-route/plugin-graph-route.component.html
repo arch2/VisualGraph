@@ -1,1 +1,20 @@
-<app-plugin-graph [config]="config"></app-plugin-graph>
+<app-plugin-graph [configSubject]="configSubject"></app-plugin-graph>
+<div class="radio-group">
+    <div>
+        <input type="radio" id="A" value="A" [formControl]="graphSelected" />
+        <label for="A">Set A</label>
+    </div>
+    <div>
+        <input type="radio" id="B" value="B" [formControl]="graphSelected" />
+        <label for="B">Set B</label>
+    </div>
+    <div>
+        <input type="radio" id="C" value="C" [formControl]="graphSelected" />
+        <label for="C">Set C</label>
+    </div>
+    <div>
+        <input type="radio" id="Z" value="Z" [formControl]="graphSelected" />
+        <label for="Z">Set Z</label>
+    </div>
+</div>
+{{graphSelected.value}}
