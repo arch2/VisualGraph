@@ -17,11 +17,14 @@ export class PluginGraphRouteComponent implements OnInit {
     this.graphSelected = new FormControl('A');
     this.configSubject = new BehaviorSubject<any>(null);
   }
+  get GraphConfigs() {
+    return graphConfigs
+  }
   ngOnInit(): void {
     this.graphSelected.valueChanges.pipe(
       startWith(this.graphSelected.value),
       tap(x => {
-        const currentConfig = graphConfigs.find(y => y.configName == x);
+        const currentConfig = this.GraphConfigs.find(y => y.configName == x);
         if (currentConfig) {
           this.config = { nodes: currentConfig.nodes, edges: currentConfig.edges };
           this.configSubject.next(this.config)

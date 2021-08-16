@@ -88,7 +88,7 @@ export const graphConfigs: any[] = [
             { id: 'REL2', label: 'REL 2', x: 450, y: 0, fixed: true, color: "red" },
             { id: 'REL3', label: 'REL 3', x: 600, y: 0, fixed: true },
             { id: 'IT', label: 'IT', x: 450, y: -100, fixed: true },
-            { id: 'REQCANCEL', label: 'REQ CANCEL', x: 450, y: 300, fixed: true }
+            { id: 'REQCANCEL', label: 'REQ CANCEL', x: 450, y: 100, fixed: true }
         ]),
         edges: new DataSet<any>([
             { id: 'a', from: 'REQ1', to: 'REL1', arrows: "to,from", },
@@ -103,6 +103,62 @@ export const graphConfigs: any[] = [
             { id: 'J', from: 'REL2', to: 'REQCANCEL', arrows: "to", },
             // { id: 'K', from: 'REL3', to: 'REQCANCEL', arrows: "to", },
             // { id: 'l', from: 'REQ1', to: 'REQCANCEL', arrows: "to", },
+        ]),
+    },
+    {
+        configName: "D",
+        nodes: new DataSet<Node>([
+            { id: 'REQ1', label: 'REQ 1', x: 0, y: 0, fixed: true },
+            { id: 'AO', label: 'AO', x: 300, y: 0, fixed: true },
+            { id: 'PA', label: 'PA', x: 450, y: 0, fixed: true, color: "red" },
+            { id: 'PEER', label: 'PEER', x: 450, y: -100, fixed: true },
+            { id: 'IT', label: 'IT', x: 300, y: 100, fixed: true },
+            { id: 'RMLRO', label: 'RML RO', x: 450, y: 100, fixed: true },
+            { id: 'NBS', label: 'NBS', x: 600, y: 0, fixed: true },
+            { id: 'ARCHPA', label: 'ARCH PA', x: 1200, y: 0, fixed: true }
+        ]),
+        edges: new DataSet<any>([
+            { id: 'a', from: 'REQ1', to: 'REL1', arrows: "to", },
+            { id: 'b', from: 'REQ1', to: 'AO', arrows: "to,from", dashes: true },
+            { id: 'e', from: 'AO', to: 'PA', arrows: "to", dashes: true },
+            { id: 'f', from: 'PA', to: 'AO', arrows: "to", dashes: true },
+            { id: 'g', from: 'PA', to: 'REQ1', arrows: "to", smooth: { type: "curvedCW", roundness: 0.2 } },
+            { id: 'h', from: 'PA', to: 'PEER', arrows: "to", },
+            { id: 'i', from: 'PEER', to: 'PA', arrows: "to", },
+            { id: 'j', from: 'PA', to: 'RMLRO', arrows: "to", },
+            { id: 'k', from: 'PA', to: 'IT', arrows: "to", },
+            { id: 'l', from: 'IT', to: 'PA', arrows: "to", },
+            { id: 'm', from: 'PA', to: 'NBS', arrows: "to", },
+            { id: 'n', from: 'NBS', to: 'ARCHPA', arrows: "to", dashes: true },
+            { id: 't', from: 'PA', to: 'ARCHPA', arrows: "to,from", smooth: { type: "curvedCW", roundness: 0.2 } }
+        ]),
+    },
+    {
+        configName: "E",
+        nodes: new DataSet<Node>([
+            { id: 'REQ1', label: 'REQ 1', x: 150, y: 0, fixed: true },
+            { id: 'AO', label: 'AO', x: 300, y: 0, fixed: true },
+            { id: 'PA', label: 'PA', x: 450, y: 0, fixed: true, color: "red" },
+            { id: 'PEER', label: 'PEER', x: 450, y: -100, fixed: true },
+            { id: 'IT', label: 'IT', x: 300, y: 100, fixed: true },
+            { id: 'RMLRO', label: 'RML RO', x: 450, y: 100, fixed: true },
+            { id: 'NBS', label: 'NBS', x: 600, y: 0, fixed: true },
+            { id: 'ARCHPA', label: 'ARCH PA', x: 750, y: 0, fixed: true }
+        ]),
+        edges: new DataSet<any>([
+            { id: 'a', from: 'REQ1', to: 'REL1', arrows: "to", },
+            { id: 'b', from: 'REQ1', to: 'AO', arrows: "to,from", dashes: true },
+            { id: 'e', from: 'AO', to: 'PA', arrows: "to", dashes: true },
+            { id: 'f', from: 'PA', to: 'AO', arrows: "to", dashes: true },
+            { id: 'g', from: 'PA', to: 'REQ1', arrows: "to", smooth: { type: "curvedCW", roundness: 0.2 } },
+            { id: 'h', from: 'PA', to: 'PEER', arrows: "to", },
+            { id: 'i', from: 'PEER', to: 'PA', arrows: "to", },
+            { id: 'j', from: 'PA', to: 'RMLRO', arrows: "to", },
+            { id: 'k', from: 'PA', to: 'IT', arrows: "to", },
+            { id: 'l', from: 'IT', to: 'PA', arrows: "to", },
+            { id: 'm', from: 'PA', to: 'NBS', arrows: "to", },
+            { id: 'n', from: 'NBS', to: 'ARCHPA', arrows: "to", dashes: true },
+            { id: 't', from: 'PA', to: 'ARCHPA', arrows: "to,from", smooth: { type: "curvedCW", roundness: 0.2 } }
         ]),
     },
     {
