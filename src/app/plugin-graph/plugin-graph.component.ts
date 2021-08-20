@@ -35,7 +35,7 @@ export class PluginGraphComponent implements AfterViewInit, OnDestroy {
       }
       else {
         const container = this.el?.nativeElement;
-        this.networkInstance = new Network(container, config, { physics: false, clickToUse: false, interaction: { zoomView: false, dragView: false } });
+        this.networkInstance = new Network(container, config, { physics: false, clickToUse: false, interaction: { zoomView: false, dragView: false, hover: true } });
       }
     }
     else {

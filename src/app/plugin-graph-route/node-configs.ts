@@ -12,6 +12,9 @@ class internalNode {
     shapeProperties: any
     widthConstraint: any;
     heightConstraint: any;
+    font: any;
+    title: string;
+
     constructor(options: {
         id?: string,
         label?: string,
@@ -25,67 +28,80 @@ class internalNode {
         this.x = options.x ? options.x : 0;
         this.y = options.y ? options.y : 0;
         this.fixed = options.fixed ? options.fixed : true;
-        const nodeColor = options.active ? 'red' : '#333333'
+        const nodeColor = options.active ? 'green' : '#333333'
         const backgroundColor = '#FFFFFF';
         this.color = {
             border: nodeColor,
             background: backgroundColor,
             highlight: { background: backgroundColor, border: nodeColor }
         };
+        this.title = `<b>test</b>${this.label}`;
         this.shape = 'box';
-        this.shapeProperties = { borderRadius: 20 };
+        this.shapeProperties = { borderRadius: 25 };
         this.widthConstraint = { minimum: 50 };
-        this.heightConstraint = { minimum: 25 };
+        this.heightConstraint = { minimum: 40 };
+        this.font = {
+            size: 11
+        };
     }
 }
-// class internalEdge {
-//     id: string;
-//     from: string;
-//     to: string;
-//     arrows: any;
-//     constructor(options: {} = {}) {
 
-//     }
-// }
+class internalEdge {
+    id: string;
+    from: string;
+    to: string;
+    arrows: any;
+    constructor(options: {
+        id?: string;
+        from?: string;
+        to?: string;
+        arrows?: any;
+    } = {}) {
+        this.id = options.id ? options.id : Math.random().toString();
+        this.from = options.from ? options.from : '';
+        this.to = options.to ? options.to : '';
+        this.arrows = options.arrows ? options.arrows : 'to';
+
+    }
+}
 export const graphConfigs: any[] = [
     {
         configName: "A",
         nodes: [
             new internalNode({ id: 'REQ1', label: 'REQ 1', x: 0, y: 0 }),
-            new internalNode({ id: 'REL1', label: 'REL', x: 150, y: 0 }),
-            new internalNode({ id: 'AO', label: 'AO', x: 300, y: 0 }),
-            new internalNode({ id: 'PA', label: 'PA', x: 450, y: 0, active: true }),
-            new internalNode({ id: 'PEER', label: 'PEER', x: 450, y: -100 }),
-            new internalNode({ id: 'IT', label: 'IT', x: 300, y: 100 }),
-            new internalNode({ id: 'RMLRO', label: 'RML RO', x: 450, y: 100 }),
-            new internalNode({ id: 'NBS', label: 'NBS', x: 600, y: 0 }),
-            new internalNode({ id: 'PRISM', label: 'PRISM', x: 750, y: 0 }),
-            new internalNode({ id: 'REQ2', label: 'REQ 2', x: 900, y: 0 }),
-            new internalNode({ id: 'NBSRO', label: 'NBS RO', x: 1050, y: 0 }),
-            new internalNode({ id: 'ARCHPA', label: 'ARCH PA', x: 1200, y: 0 }),
+            new internalNode({ id: 'REL1', label: 'REL', x: 100, y: 0 }),
+            new internalNode({ id: 'AO', label: 'AO', x: 200, y: 0 }),
+            new internalNode({ id: 'PA', label: 'PA', x: 300, y: 0, active: true }),
+            new internalNode({ id: 'PEER', label: 'PEER', x: 350, y: -100 }),
+            new internalNode({ id: 'IT', label: 'IT', x: 250, y: 100 }),
+            new internalNode({ id: 'RMLRO', label: 'RML RO', x: 350, y: 100 }),
+            new internalNode({ id: 'NBS', label: 'NBS', x: 400, y: 0 }),
+            new internalNode({ id: 'PRISM', label: 'PRISM', x: 500, y: 0 }),
+            new internalNode({ id: 'REQ2', label: 'REQ 2', x: 600, y: 0 }),
+            new internalNode({ id: 'NBSRO', label: 'NBS RO', x: 700, y: 0 }),
+            new internalNode({ id: 'ARCHPA', label: 'ARCH PA', x: 800, y: 0 }),
         ],
         edges: [
-            { id: 'a', from: 'REQ1', to: 'REL1', arrows: "to", },
-            { id: 'b', from: 'REL1', to: 'REQ1', arrows: "to", },
-            { id: 'c', from: 'REL1', to: 'AO', arrows: "to", dashes: true },
-            { id: 'd', from: 'AO', to: 'REL1', arrows: "to", dashes: true },
-            { id: 'e', from: 'AO', to: 'PA', arrows: "to", dashes: true },
-            { id: 'f', from: 'PA', to: 'AO', arrows: "to", dashes: true },
-            { id: 'g', from: 'PA', to: 'REQ1', arrows: { to: { enabled: true, scaleFactor: 0.7 } }, smooth: { type: "curvedCW", roundness: 0.2 } },
-            { id: 'h', from: 'PA', to: 'PEER', arrows: "to", },
-            { id: 'i', from: 'PEER', to: 'PA', arrows: "to", },
-            { id: 'j', from: 'PA', to: 'RMLRO', arrows: "to", },
+            { id: 'a', from: 'REQ1', to: 'REL1', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'c', from: 'REL1', to: 'AO', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            //{ id: 'd', from: 'AO', to: 'REL1', arrows: { to: {enabled: true, scaleFactor: 0.6 }, from: {enabled: false, scaleFactor: 0.6 }}},
+            { id: 'e', from: 'AO', to: 'PA', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'f', from: 'PA', to: 'AO', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: true, scaleFactor: 0.6 } }, color: 'red' },
+            { id: 'g', from: 'PA', to: 'REQ1', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } }, smooth: { type: "curvedCW", roundness: 0.3 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: -5 }, color: 'red' },
+            { id: 'h', from: 'PA', to: 'PEER', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: true, scaleFactor: 0.6 } }, smooth: { type: "vertical", roundness: 0.6 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: 0 }, color: 'gray', dashes: true },
+            //{ id: 'i', from: 'PEER', to: 'PA', arrows: "to", },
+            { id: 'j', from: 'PA', to: 'RMLRO', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: true, scaleFactor: 0.6 } }, smooth: { type: "vertical", roundness: 0.6 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: 0 } },
             // { id: 'k', from: 'PA', to: 'IT', arrows: "to", },
-            { id: 'l', from: 'PA', to: 'IT', arrows: { to: { enabled: true, scaleFactor: 0.7 }, from: { enabled: true, scaleFactor: 0.7 } }, smooth: { type: "curvedCW", roundness: 0.2 } },
-            { id: 'm', from: 'PA', to: 'NBS', arrows: "to", },
-            { id: 'n', from: 'NBS', to: 'PRISM', arrows: "to", },
-            { id: 'o', from: 'PRISM', to: 'REQ2', arrows: "to", },
-            { id: 'p', from: 'REQ2', to: 'NBSRO', arrows: "to", },
-            { id: 'q', from: 'NBSRO', to: 'ARCHPA', arrows: "to", },
-            { id: 'r', from: 'ARCHPA', to: 'NBSRO', arrows: "to", },
-            { id: 's', from: 'ARCHPA', to: 'PA', arrows: "to", smooth: { type: "curvedCW", roundness: 0.2 } },
-            { id: 't', from: 'PA', to: 'ARCHPA', arrows: "to,from", smooth: { type: "curvedCW", roundness: 0.2 } }
-        ],
+            { id: 'l', from: 'PA', to: 'IT', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: true, scaleFactor: 0.6 } }, smooth: { type: "vertical", roundness: 0.6 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: 0 } },
+            { id: 'm', from: 'PA', to: 'NBS', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: true, scaleFactor: 0.6 } } },
+            { id: 'n', from: 'NBS', to: 'PRISM', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'o', from: 'PRISM', to: 'REQ2', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'p', from: 'REQ2', to: 'NBSRO', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'q', from: 'NBSRO', to: 'ARCHPA', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 'r', from: 'ARCHPA', to: 'NBSRO', arrows: { to: { enabled: false, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } } },
+            { id: 's', from: 'ARCHPA', to: 'PA', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } }, smooth: { type: "curvedCW", roundness: 0.3 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: -5 }, color: 'orange' },
+            { id: 't', from: 'PA', to: 'ARCHPA', arrows: { to: { enabled: true, scaleFactor: 0.6 }, from: { enabled: false, scaleFactor: 0.6 } }, smooth: { type: "curvedCW", roundness: 0.3 }, arrowStrikethrough: true, endPointOffset: { to: -9, from: -5 } }
+        ]
     },
     {
         configName: "B",
